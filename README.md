@@ -27,7 +27,7 @@ SR Accessible Mobile First Genesis Child theme and Genesis Accessible together p
 - Genesis Framework: The SR Accessible Mobile First Genesis Child theme and the plugin Genesis Accessible are written for the Genesis framework version 2.0 or higher.
 You can buy and download it at studiopress.com, you only need the basic framework (http://my.studiopress.com/themes/genesis/).
 - The plugin Genesis Accessible (http://wordpress.org/plugins/genesis-accessible/).
-- The SR Accessible Mobile First Genesis Child theme (https://github.com/RRWD/leiden.git).
+- The SR Accessible Mobile First Genesis Child theme (https://github.com/scarinessreported/SR-Accessible-Mobile-First-Genesis-Child-theme).
 
 == Installation ==
 
