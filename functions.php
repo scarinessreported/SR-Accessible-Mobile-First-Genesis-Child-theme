@@ -16,6 +16,16 @@ function sr_starter_scripts() {
     wp_enqueue_script( 'sr_starter-responsive-menu', get_bloginfo( 'stylesheet_directory' ) . '/js/responsive-menu.js', array( 'jquery' ), '1.0.0' );
 }
 
+//* Add Accessible Dropdown
+
+add_action( 'wp_enqueue_scripts', 'genwpacc_dropdown_scripts' );
+function genwpacc_dropdown_scripts() {
+
+    wp_enqueue_script( 'genwpacc-dropdown',  get_bloginfo( 'stylesheet_directory' ) . '/js/genwpacc-dropdown.js', array( 'jquery' ), false, true );
+
+    wp_register_style( 'genwpacc-dropdown-css', get_bloginfo( 'stylesheet_directory' ) . '/css/genwpacc-dropdown.css' );
+    wp_enqueue_style('genwpacc-dropdown-css');
+}
 //* Enqueue Dashicons
 add_action( 'wp_enqueue_scripts', 'enqueue_dashicons' );
 function enqueue_dashicons() {
