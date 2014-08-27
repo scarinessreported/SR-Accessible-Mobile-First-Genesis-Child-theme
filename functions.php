@@ -10,30 +10,31 @@ define( 'CHILD_THEME_NAME', 'SR Accessible Mobile First Starter Theme', 'srstart
 define( 'CHILD_THEME_URL', 'http://scarinessreported.com/' );
 define( 'CHILD_THEME_VERSION', '1.0.0' );
 
-//* Add responsive menu script
-add_action( 'wp_enqueue_scripts', 'sr_starter_scripts' );
-function sr_starter_scripts() {
-    wp_enqueue_script( 'sr_starter-responsive-menu', get_bloginfo( 'stylesheet_directory' ) . '/js/responsive-menu.js', array( 'jquery' ), '1.0.0' );
-}
+//* Enqueue Styles and Scripts
+add_action( 'wp_enqueue_scripts', 'genesis_sample_scripts' );
+function genesis_sample_scripts() {
 
-//* Add Accessible Dropdown
+    $minnified = '.min';
 
-add_action( 'wp_enqueue_scripts', 'genwpacc_dropdown_scripts' );
-function genwpacc_dropdown_scripts() {
+    //* Remove default CSS
+    wp_dequeue_style( 'sr-accessible-mobile-first-starter-theme' );
 
-    wp_enqueue_script( 'genwpacc-dropdown',  get_bloginfo( 'stylesheet_directory' ) . '/js/genwpacc-dropdown.js', array( 'jquery' ), false, true );
+    //* Add compiled CSS
+    wp_register_style( 'genesis-sample-styles', get_stylesheet_directory_uri() . '/style' . $minnified . '.css', array(), CHILD_THEME_VERSION );
+    wp_enqueue_style( 'genesis-sample-styles' );
 
-    wp_register_style( 'genwpacc-dropdown-css', get_bloginfo( 'stylesheet_directory' ) . '/css/genwpacc-dropdown.css' );
-    wp_enqueue_style('genwpacc-dropdown-css');
-}
-//* Enqueue Dashicons
-add_action( 'wp_enqueue_scripts', 'enqueue_dashicons' );
-function enqueue_dashicons() {
-    wp_enqueue_style( 'dashicons' );
+    //* Add compiled JS
+    wp_enqueue_script( 'genesis-sample-scripts', get_stylesheet_directory_uri() . '/js/project' . $minnified . '.js', array( 'jquery' ), CHILD_THEME_VERSION );
+
+    //* Add css3 media queries
+    wp_enqueue_script( 'css3-mediaqueries',  get_bloginfo( 'stylesheet_directory' ) . '/js/css3-mediaqueries'. $minnified . '.js', array( 'jquery' ), false, true );
+
+    //* Enqueue Dashicons
+        wp_enqueue_style( 'dashicons' );
 }
 
 //* Add HTML5 markup structure
-add_theme_support( 'html5' );
+add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', ) );
 
 //* Add viewport meta tag for mobile browsers
 add_theme_support( 'genesis-responsive-viewport' );
@@ -43,6 +44,15 @@ add_theme_support( 'custom-background' );
 
 //* Add support for 3-column footer widgets
 add_theme_support( 'genesis-footer-widgets', 3 );
+
+//* Remove comment form allowed tags
+add_filter( 'comment_form_defaults', 'mobile_first_remove_comment_form_allowed_tags' );
+function mobile_first_remove_comment_form_allowed_tags( $defaults ) {
+
+    $defaults['comment_notes_after'] = '';
+    return $defaults;
+
+}
 
 //* Customize the entire footer
 remove_action( 'genesis_footer', 'genesis_do_footer' );
